@@ -17,6 +17,8 @@ const Login = () => {
         .post(BASE_URL + "login", {
           emailId: emailId,
           password: password,
+        },{
+          withCredentials: true,
         })
         .then((response) => {
           console.log(response);
