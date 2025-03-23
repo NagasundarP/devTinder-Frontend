@@ -11,7 +11,6 @@ const Feed = () => {
   const feed = useSelector((state) => state.feed, {
     withCredentials: true,
   });
-  console.log(feed);
   const dispatch = useDispatch();
 
   const getFeed = async () => {
@@ -34,7 +33,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex flex-wrap justify-center gap-4">
       <UserCard user={data} />
     </div>
   );
