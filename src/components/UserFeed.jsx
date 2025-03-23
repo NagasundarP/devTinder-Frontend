@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
+import UserCard from "./UserCard";
+import { useState } from "react";
 
 const Feed = () => {
-  const feed = useSelector((state) => state.feed,{
+  const [data, setData] = useState(null);
+  const feed = useSelector((state) => state.feed, {
     withCredentials: true,
   });
   console.log(feed);
@@ -14,12 +17,15 @@ const Feed = () => {
   const getFeed = async () => {
     if (feed) return;
     try {
-      const res = await axios.get(BASE_URL + "feed");
-      dispatch(addFeed(res?.data?.data));
-      console.log(res?.data?.data);
-
+      const res = await axios.get(BASE_URL + "feed",
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(addFeed(res?.data));
+      // console.log(res?.data?.data);
+      setData(res?.data);
     } catch (err) {
-      console.log(err);
     }
   };
 
@@ -28,8 +34,8 @@ const Feed = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Feed</h1>
+    <div className="flex justify-center my-10">
+      <UserCard user={data} />
     </div>
   );
 };
