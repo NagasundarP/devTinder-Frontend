@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const feedSlice = createSlice({
     name: 'feed',
@@ -9,7 +10,9 @@ const feedSlice = createSlice({
             return action.payload;
         },
         removeFeed: (state, action) => {
-            return null;
+            const newArr = state.filter(user=>user._id!==action.payload)
+            console.log(newArr)
+            return newArr;
         },
     },
 });
